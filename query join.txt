@@ -58,12 +58,13 @@ WHERE departments.name = "Dipartimento di Matematica"
 
 7. BONUS: Selezionare per ogni studente quanti tentativi d’esame ha sostenuto per
 superare ciascuno dei suoi esami
-SELECT students.name AS "NOME STUDENTE" , students.surname AS "COGNOME STUDENTE" , exams.id AS "ID ESAME", COUNT(exams.id) AS "TENTATIVI", AVG(exam_student.vote) AS "MEDIA VOTI" FROM students 
+SELECT students.name AS "NOME STUDENTE" , students.surname AS "COGNOME STUDENTE" , students.id AS "ID STUDENTE", exams.id AS "ID ESAME", COUNT(exams.id) AS "TENTATIVI", AVG(exam_student.vote) AS "MEDIA VOTI" FROM students 
 JOIN exam_student 
 ON students.id = exam_student.student_id 
 JOIN exams 
 ON exams.id = exam_student.exam_id 
-GROUP BY students.name, students.surname , exams.id 
-HAVING AVG(exam_student.vote) > 17 
+GROUP BY students.name, students.surname , exams.id , students.id
+HAVING AVG(exam_student.vote) > 17
 ORDER BY students.surname ASC, students.name;
+
 
